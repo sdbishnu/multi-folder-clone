@@ -7,7 +7,6 @@ on:
 
 jobs:
   release:
-    # pinning to windows-2025 explicitly clears the June 2026 redirection notice
     runs-on: windows-2025
 
     steps:
@@ -17,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24 # Upgraded to 24 to clear the deprecation warning
+          node-version: 24
           cache: 'npm'
 
       - name: Install Dependencies
@@ -26,6 +25,5 @@ jobs:
       - name: Compile and Publish Desktop Executable
         run: npm run publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          # Forces the GitHub Runner to execute tasks natively under Node 24
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Changed to the built-in safe token
           FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
