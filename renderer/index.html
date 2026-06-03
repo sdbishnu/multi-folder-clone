@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced Git Copy Tool</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<div class="topbar">
+
+    <div class="header-left">
+        <h1>🚀 Multi Folder Git Copy Tool</h1>
+    </div>
+
+    <!-- RIGHT SIDE -->
+
+    <div class="topbar-right">
+
+        <!-- GIT ACTIONS -->
+
+        <div class="git-actions">
+
+            <label class="git-check">
+                <input type="checkbox" id="stashCheck" checked>
+                Git Stash
+            </label>
+
+            <label class="git-check">
+                <input type="checkbox" id="pullCheck" checked>
+                Git Pull
+            </label>
+
+            <label class="git-check">
+                <input type="checkbox" id="popCheck" checked>
+                Git Stash Pop
+            </label>
+
+        </div>
+
+        <!-- DEPLOY BUTTON -->
+
+        <div class="actions">
+
+            <button id="deployBtn">
+                🚀 Start Deployment
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main-layout">
+
+    <!-- SOURCE -->
+
+    <div class="panel">
+
+        <div class="panel-top">
+
+            <!-- LEFT -->
+
+            <div class="left-actions">
+
+                <button id="pickSource" class="primary-btn">
+                    📂 Select Source
+                </button>
+
+            </div>
+
+            <!-- RIGHT -->
+
+            <div class="panel-buttons">
+
+                <button id="previewSource" class="secondary-btn">
+                    👁 Preview
+                </button>
+
+                <button
+                    id="clearSourceSelection"
+                    class="clear-btn"
+                >
+                    ✕ Clear
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="sourceSearch"
+                placeholder="Select Source Folder"
+            >
+
+            <span class="clear-search" id="clearSourceSearch">
+                ✕
+            </span>
+
+        </div>
+
+        <div class="tree-wrapper">
+            <div id="sourceTree"></div>
+        </div>
+
+    </div>
+
+    <!-- DESTINATION -->
+
+    <div class="panel">
+
+        <div class="panel-top">
+
+            <!-- LEFT -->
+
+            <div class="left-actions">
+
+                <button id="pickDestination" class="primary-btn">
+                    📂 Select Destination
+                </button>
+
+            </div>
+
+            <!-- RIGHT -->
+
+            <div class="panel-buttons">
+
+                <button
+                    id="previewDestination"
+                    class="secondary-btn"
+                >
+                    👁 Preview
+                </button>
+
+                <button
+                    id="clearDestinationSelection"
+                    class="clear-btn"
+                >
+                    ✕ Clear
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="destinationSearch"
+                placeholder="Select Destination Folder"
+            >
+
+            <span class="clear-search" id="clearDestinationSearch">
+                ✕
+            </span>
+
+        </div>
+
+        <div class="tree-wrapper">
+            <div id="destinationTree"></div>
+        </div>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+
+    <div class="panel right-panel">
+
+        <div class="analytics-row">
+
+            <div class="analytics-card success">
+                <small>SUCCESS</small>
+                <h2 id="successCount">0</h2>
+            </div>
+
+            <div class="analytics-card conflict">
+                <small>CONFLICT</small>
+                <h2 id="conflictCount">0</h2>
+            </div>
+
+            <div class="analytics-card running">
+                <small>RUNNING</small>
+                <h2 id="runningCount">0</h2>
+            </div>
+
+            <div class="analytics-card skipped">
+                <small>SKIPPED</small>
+                <h2 id="skippedCount">0</h2>
+            </div>
+
+        </div>
+
+        <!-- PROGRESS -->
+
+        <div class="progress-box">
+
+            <div class="progress-header">
+
+                <div class="progress-left">
+
+                    <span class="progress-title">
+                        Repository Progress
+                    </span>
+
+                    <span id="currentRepo">
+                        -
+                    </span>
+
+                </div>
+
+                <span id="globalPercent">
+                    0%
+                </span>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div id="progressFill"></div>
+
+            </div>
+
+            <div
+                id="currentItem"
+                class="current-item"
+            >
+                No active deployment
+            </div>
+
+        </div>
+
+        <!-- LOGS -->
+
+        <div class="logs-header">
+
+            <h2>📜 Live Console</h2>
+
+            <button id="clearLogs">
+                🗑 Clear
+            </button>
+
+        </div>
+
+        <div id="logs" class="logs"></div>
+
+    </div>
+
+</div>
+
+<!-- PREVIEW MODAL -->
+
+<div id="previewModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2 id="previewTitle">Preview</h2>
+
+            <button id="closePreview">✕</button>
+
+        </div>
+
+        <div id="previewBody" class="preview-body"></div>
+
+    </div>
+
+</div>
+
+<script src="./app.js"></script>
+
+</body>
+</html>
