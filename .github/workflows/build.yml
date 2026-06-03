@@ -1,0 +1,28 @@
+name: Build and Publish Electron App
+
+on:
+  push:
+    branches:
+      - main # Triggers the build every time you push code to main
+
+jobs:
+  release:
+    runs-on: windows-latest # Runs on a clean Windows cloud server
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Compile and Publish Desktop Executable
+        run: npm run publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # Pulls your secret token safely
