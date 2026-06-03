@@ -38,7 +38,7 @@ An **Enterprise Smart Git Deployment & Directory Synchronization Tool** built on
 
 ### Windows Setup (.exe)
 1. Navigate to the [Latest Releases Dashboard](https://github.com/sdbishnu/multi-folder-clone/releases/latest).
-2. Download `Git Copy Tool Setup 2.0.0.exe`.
+2. Download `Git Copy Tool Setup [version].exe`.
 3. Double-click the installer executable to launch the deployment wizard.
 4. Launch the application from your desktop or start menu shortcut.
 
