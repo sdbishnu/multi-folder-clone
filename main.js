@@ -8,6 +8,11 @@ const { deployToRepositories } = require('./services/gitCopyService');
 autoUpdater.autoDownload = false; 
 autoUpdater.forceDevUpdateConfig = true; // Force local dev testing with dev-app-update.yml
 
+// This handles the request from the frontend and returns the real package.json version
+ipcMain.handle('get-app-version', () => {
+    return app.getVersion();
+});
+
 let win; // Make window reference global so autoUpdater events can access it
 
 function createWindow() {
@@ -18,7 +23,8 @@ function createWindow() {
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
-            nodeIntegration: false
+            nodeIntegration: false,
+            devTools: !app.isPackaged
         }
     });
     win.loadFile(path.join(__dirname, 'renderer', 'index.html'));

@@ -1,6 +1,9 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
+    // Expose the version hook
+    getAppVersion: () => ipcRenderer.invoke('get-app-version'),
+    
     // --- EXISTING DIRECTORY & DEPLOYMENT HANDLERS ---
     selectFolder: () =>
         ipcRenderer.invoke('select-folder'),

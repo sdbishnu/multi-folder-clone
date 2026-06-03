@@ -24,9 +24,46 @@ body{
     box-shadow:0 5px 15px rgba(0,0,0,0.05);
 }
 
-.header-left h1{
+/* .header-left h1{
     font-size:28px;
     margin-bottom:6px;
+} */
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Smooth spacing between title text and badge */
+}
+
+.header-left h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000; /* Crisp slate white */
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.3px;
+}
+
+.version-badge {
+    background-color: rgba(56, 189, 248, 0.1); /* Subtle transparent teal/blue tint */
+    color: #38bdf8; /* Vibrant electric blue text */
+    font-size: 10px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-weight: 600;
+    margin-top: 7px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    letter-spacing: 0.5px;
+    text-transform: lowercase;
+    transition: all 0.2s ease;
+}
+
+/* Optional hover effect just for a premium interactive feel */
+.version-badge:hover {
+    background-color: rgba(56, 189, 248, 0.18);
+    border-color: rgba(56, 189, 248, 0.35);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.15);
 }
 
 .header-left p{

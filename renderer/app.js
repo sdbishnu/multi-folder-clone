@@ -836,3 +836,17 @@ closeUpdateBtn.onclick = () => {
     updateModal.style.display = 'none';
     addLocalLog('SYSTEM', 'Software update deferred by user.');
 };
+
+// Dynamic Header Version Injection
+document.addEventListener('DOMContentLoaded', async () => {
+    const versionDisplay = document.getElementById('current-ui-version');
+    if (versionDisplay) {
+        try {
+            const currentVersion = await window.electronAPI.getAppVersion();
+            versionDisplay.innerText = `v${currentVersion}`;
+        } catch (error) {
+            console.error("Failed to load version:", error);
+            versionDisplay.innerText = "";
+        }
+    }
+});
