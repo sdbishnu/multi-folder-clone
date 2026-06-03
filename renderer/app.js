@@ -771,3 +771,68 @@ function addLocalLog(status, message) {
 
     logs.prepend(div);
 }
+
+// ========================================================
+// 🚀 AUTO-UPDATER INTERACTIVE UI CONTROLLER
+// ========================================================
+
+const updateModal = document.getElementById('update-modal');
+const updateTitle = document.getElementById('update-title');
+const updateText = document.getElementById('update-text');
+const actionUpdateBtn = document.getElementById('action-update-btn');
+const closeUpdateBtn = document.getElementById('close-update-btn');
+const versionTag = document.getElementById('update-version-tag');
+
+// 1. Listen for new update packages discovered on GitHub
+window.electronAPI.onUpdateAvailable((version) => {
+    addLocalLog('SYSTEM', `Updater detected an available software release: v${version}`);
+    
+    updateTitle.innerText = "Software Update Available";
+    versionTag.innerText = `VERSION v${version} LATEST`;
+    updateText.innerText = `An enterprise optimization upgrade (v${version}) is ready for download. Would you like to update your client now?`;
+    
+    // Reveal the backdrop-blurred modal container
+    updateModal.style.display = 'flex';
+    
+    actionUpdateBtn.onclick = () => {
+        window.electronAPI.downloadUpdate();
+        
+        // Render immediate downloading button micro-interactions
+        actionUpdateBtn.innerText = "Downloading Files...";
+        actionUpdateBtn.disabled = true;
+        actionUpdateBtn.style.background = '#475569';
+        actionUpdateBtn.style.boxShadow = 'none';
+        actionUpdateBtn.style.cursor = 'default';
+        closeUpdateBtn.style.display = 'none'; // Lock dialog dismissal during operations
+    };
+});
+
+// 2. Listen for the complete assembly download lifecycle hook
+window.electronAPI.onUpdateReady(() => {
+    addLocalLog('SYSTEM', 'Update installer bundle downloaded successfully.');
+
+    updateTitle.innerText = "Installation Blueprint Ready";
+    versionTag.innerText = "DOWNLOAD COMPLETION SUCCESS";
+    updateText.innerText = "The deployment bundles are staged on your device filesystem. Restart the application now to finalize updates.";
+    
+    actionUpdateBtn.innerText = "Restart & Install";
+    actionUpdateBtn.disabled = false;
+    actionUpdateBtn.style.background = '#10b981'; // Dynamic shift to green success indicator
+    actionUpdateBtn.style.boxShadow = '0 4px 6px -1px rgba(16, 185, 129, 0.3)';
+    actionUpdateBtn.style.cursor = 'pointer';
+
+    actionUpdateBtn.onclick = () => {
+        window.electronAPI.quitAndInstall();
+    };
+});
+
+// 3. Catch update exceptions and stream them directly into your live console tracker
+window.electronAPI.onUpdateError((errorMsg) => {
+    addLocalLog('CONFLICT', `Auto-updater module issue: ${errorMsg}`);
+});
+
+// Handle window closing when opting out
+closeUpdateBtn.onclick = () => {
+    updateModal.style.display = 'none';
+    addLocalLog('SYSTEM', 'Software update deferred by user.');
+};

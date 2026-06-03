@@ -1,4 +1,21 @@
-node_modules/
 out/
-dist/
 .env
+# Dependency folders
+node_modules/
+jspm_packages/
+
+# Production build outputs (Electron Builder installs go here)
+dist/
+release/
+
+# Local development update config (Crucial!)
+dev-app-update.yml
+
+# Operating system metadata overrides
+.DS_Store
+Thumbs.db
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
