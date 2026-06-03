@@ -3,17 +3,25 @@
   "version": "2.0.0",
   "description": "Enterprise Smart Git Deployment Tool",
   "main": "main.js",
-  "build": {
-    "appId": "com.gitcopy.tool",
-    "productName": "Git Copy Tool",
-    "win": {
-      "target": "nsis",
-      "icon": "assets/icon.ico"
-    }
-  },
   "scripts": {
     "start": "electron .",
     "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.gitcopy.tool",
+    "productName": "Git Copy Tool",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "sdbishnu",
+      "repo": "multi-folder-clone"
+    }
   },
   "dependencies": {
     "diff": "^9.0.0",
