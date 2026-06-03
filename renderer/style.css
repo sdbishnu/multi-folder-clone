@@ -478,16 +478,9 @@ input[type="checkbox"] {
 ========================= */
 
 .log-message{
-
-    padding:10px 12px;
-
-    font-size:12px;
-    line-height:1.5;
-
-    white-space:pre-wrap;
-    word-break:break-word;
-
-    background:white;
+    padding: 6px;
+    font-size: 12px;
+    line-height: 2;
 }
 
 /* =========================

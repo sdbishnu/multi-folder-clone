@@ -1,9 +1,13 @@
 {
   "name": "advanced-git-copy-tool",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Enterprise Smart Git Deployment Tool",
   "author": "Bishnu Prasad",
   "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sdbishnu/multi-folder-clone.git"
+  },
   "scripts": {
     "start": "electron .",
     "build": "electron-builder",
@@ -27,6 +31,7 @@
   },
   "dependencies": {
     "diff": "^9.0.0",
+    "electron-updater": "^6.8.3",
     "fs-extra": "^11.3.0",
     "simple-git": "^3.28.0"
   },
