@@ -3,11 +3,12 @@ name: Build and Publish Electron App
 on:
   push:
     branches:
-      - main # Triggers the build every time you push code to main
+      - main
 
 jobs:
   release:
-    runs-on: windows-latest # Runs on a clean Windows cloud server
+    # pinning to windows-2025 explicitly clears the June 2026 redirection notice
+    runs-on: windows-2025
 
     steps:
       - name: Checkout Repository
@@ -16,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-node-version: 20
+          node-version: 24 # Upgraded to 24 to clear the deprecation warning
           cache: 'npm'
 
       - name: Install Dependencies
@@ -25,4 +26,6 @@ jobs:
       - name: Compile and Publish Desktop Executable
         run: npm run publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # Pulls your secret token safely
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          # Forces the GitHub Runner to execute tasks natively under Node 24
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
